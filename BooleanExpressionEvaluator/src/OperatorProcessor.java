@@ -19,7 +19,7 @@ public class OperatorProcessor {
         if (list.get(index) == Tokenizer.NOT) {
             if ((list.get(index - 1) == Tokenizer.TRUE || list.get(index - 1) == Tokenizer.FALSE)
                     && (list.get(index + 1) == Tokenizer.TRUE || list.get(index + 1) == Tokenizer.FALSE)) {
-                throw new SyntaxException("Invalid Syntax: Not cannot be in between two booleans");
+                throw new SyntaxException("Invalid Syntax: NOT operator cannot be in between two booleans");
             }
         }
         if (list.get(index - 1) == Tokenizer.NOT && list.get(index) != Tokenizer.NOT) {
