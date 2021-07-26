@@ -26,7 +26,7 @@ public class Evaluator {
      * @throws SyntaxException
      */
     public void ValidateInput(List<Integer> tokens) throws SyntaxException {
-        if (tokens.contains(-1)) {
+        if (tokens.contains(Tokenizer.INVALID)) {
             throw new SyntaxException("Invalid Symbols");
         }
         if (CountOccurrences(Tokenizer.LEFT, tokens) != CountOccurrences(Tokenizer.RIGHT, tokens)) {
