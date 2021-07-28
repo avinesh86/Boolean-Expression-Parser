@@ -1,7 +1,7 @@
 package Classes.Validator;
 
 import Classes.Exceptions.SyntaxException;
-import Classes.Helpers.Helper;
+import Classes.Statics.Helpers.Helper;
 import Classes.Statics.Tokenizer;
 
 import java.util.List;
@@ -30,6 +30,12 @@ public class InputValidator implements Interface.Validators.InputValidator {
         }
     }
 
+    /**
+     * This function validate for consecutive operators
+     * @param list
+     * @param index
+     * @throws SyntaxException
+     */
     public void ValidateConsecutiveOperators(List<Integer> list, int index) throws SyntaxException {
         if (list.size()>index + 1 && list.get(index) == Tokenizer.AND) {
             ValidateConsecutiveAndandOR(list, index);
@@ -39,18 +45,35 @@ public class InputValidator implements Interface.Validators.InputValidator {
         }
     }
 
+    /**
+     * This function validate consecutive AND and OR
+     * @param list
+     * @param index
+     * @throws SyntaxException
+     */
     public void ValidateConsecutiveAndandOR(List<Integer> list, int index) throws SyntaxException {
         if (list.get(index + 1) == Tokenizer.OR) {
             throw new SyntaxException("Invalid Syntax: Consecutive AND and OR");
         }
     }
 
+    /**
+     * This function validate consecutive OR and AND
+     * @param list
+     * @param index
+     * @throws SyntaxException
+     */
     public void ValidateConsecutiveORandAND(List<Integer> list, int index) throws SyntaxException {
         if (list.get(index + 1) == Tokenizer.AND) {
             throw new SyntaxException("Invalid Syntax: Consecutive OR and AND");
         }
     }
 
+    /**
+     * This function validate Null and Empty inputs
+     * @param input
+     * @throws SyntaxException
+     */
     public void ValidateNullEmpty(String input) throws SyntaxException  {
         if (input == null || input.length() == 0) {
             throw new SyntaxException("Input is Null or Empty");

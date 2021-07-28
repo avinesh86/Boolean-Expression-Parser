@@ -1,6 +1,6 @@
 package Classes.Main;
 
-import Classes.Evaluator;
+import Classes.Evaluator.Evaluator;
 import Classes.Exceptions.SyntaxException;
 
 public class BooleanEvaluator {

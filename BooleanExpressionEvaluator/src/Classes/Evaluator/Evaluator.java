@@ -1,7 +1,7 @@
-package Classes;
+package Classes.Evaluator;
 
 import Classes.Exceptions.SyntaxException;
-import Classes.Helpers.Helper;
+import Classes.Statics.Helpers.Helper;
 import Classes.Operators.*;
 import Classes.Statics.Parser;
 import Classes.Statics.Tokenizer;
@@ -11,7 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Evaluator extends InputValidator {
+public class Evaluator extends InputValidator implements Interface.Evaluator.Evaluator {
     /**
      * This is the main evaluate function
      * @param input

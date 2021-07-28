@@ -1,4 +1,4 @@
-package Classes.Helpers;
+package Classes.Statics.Helpers;
 
 import Classes.Statics.Tokenizer;
 
