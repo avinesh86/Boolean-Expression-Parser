@@ -30,7 +30,7 @@ public class InputValidator implements Interface.Validators.InputValidator {
         }
     }
 
-    public void ValidateConsecutiveOperators(List<Integer> list, int index, int operator) throws SyntaxException {
+    public void ValidateConsecutiveOperators(List<Integer> list, int index) throws SyntaxException {
         if (list.size()>index + 1 && list.get(index) == Tokenizer.AND) {
             ValidateConsecutiveAndandOR(list, index);
         }

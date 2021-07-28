@@ -92,7 +92,7 @@ public class Evaluator extends InputValidator {
                 }
                 for (Integer operator: Tokenizer.OPERATOR_PRECEDENCE) {
                     for (int index = 1; index < list.size(); index++) {
-                        ValidateConsecutiveOperators(list, index, operator);
+                        ValidateConsecutiveOperators(list, index);
                         if(operator == list.get(index)){
 
                             if (list.get(index) == Tokenizer.AND && list.get(index + 1) == Tokenizer.AND) {

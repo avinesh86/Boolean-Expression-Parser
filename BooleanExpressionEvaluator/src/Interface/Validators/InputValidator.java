@@ -10,5 +10,5 @@ public interface InputValidator {
     public void ValidateConsecutiveAndandOR(List<Integer> list, int index) throws SyntaxException;
     public void ValidateNullEmpty(String input) throws SyntaxException;
     public void ValidateConsecutiveORandAND(List<Integer> list, int index) throws SyntaxException;
-    public void ValidateConsecutiveOperators(List<Integer> list, int index, int operator) throws SyntaxException;
+    public void ValidateConsecutiveOperators(List<Integer> list, int index) throws SyntaxException;
 }
