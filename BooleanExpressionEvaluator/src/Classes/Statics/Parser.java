@@ -1,4 +1,7 @@
-import java.io.InputStream;
+package Classes.Statics;
+
+import Classes.Statics.Tokenizer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,7 +9,7 @@ public class Parser {
     private static List<Integer> tokens;
 
     /**
-     * Parser function read through the list until end and populate token list
+     * Classes.Statics.Parser function read through the list until end and populate token list
      * @param list
      * @return
      */

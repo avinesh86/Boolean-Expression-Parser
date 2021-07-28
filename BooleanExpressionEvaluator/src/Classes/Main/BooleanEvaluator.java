@@ -1,3 +1,7 @@
+package Classes.Main;
+
+import Classes.Evaluator;
+import Classes.Exceptions.SyntaxException;
 
 public class BooleanEvaluator {
     /**
@@ -12,6 +16,12 @@ public class BooleanEvaluator {
     public static void main(String[] args) {
         // Input expression strings.
         String[] inputs = {
+                "true & | ! true",
+                "true ! & | true",
+                "true | ! & true",
+                "true ! | & true",
+                "true | & true",
+                "true & | true",
                 "true & ! false",
                 "true & ((true | false) & !(true & false))",
                 "true",
@@ -48,7 +58,7 @@ public class BooleanEvaluator {
                 "false && true",
                 "true)",
                 "(true",
-                "true &",
+                "true &|",
                 null,
                 "",
                 "12346",

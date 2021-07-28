@@ -1,8 +1,17 @@
+package Classes;
+
+import Classes.Exceptions.SyntaxException;
+import Classes.Helpers.Helper;
+import Classes.Operators.*;
+import Classes.Statics.Parser;
+import Classes.Statics.Tokenizer;
+import Classes.Validator.InputValidator;
+
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Evaluator {
+public class Evaluator extends InputValidator {
     /**
      * This is the main evaluate function
      * @param input
@@ -10,28 +19,13 @@ public class Evaluator {
      * @throws SyntaxException
      */
     public boolean evaluate(String input) throws SyntaxException {
-        if (input == null || input.length() == 0) {
-            throw new SyntaxException("Input is Null or Empty");
-        }
 
+        ValidateNullEmpty(input);
         Tokenizer tokenizer = new Tokenizer(new ByteArrayInputStream(input.getBytes()));
         List<Integer> tokens = Parser.Parser(tokenizer);
-        ValidateInput(tokens);
+        ValidateInvalidSymbol(tokens);
+        ValidateParenthesis(tokens);
         return ReturnFinalAnswer(EvaluateFullExpression(tokens));
-    }
-
-    /**
-     * This function validate the input by checking number of parenthesis and invalid symbols
-     * @param tokens
-     * @throws SyntaxException
-     */
-    public void ValidateInput(List<Integer> tokens) throws SyntaxException {
-        if (tokens.contains(Tokenizer.INVALID)) {
-            throw new SyntaxException("Invalid Symbols");
-        }
-        if (Helper.CountOccurrences(Tokenizer.LEFT, tokens) != Helper.CountOccurrences(Tokenizer.RIGHT, tokens)) {
-            throw new SyntaxException("Invalid Number of Parenthesis");
-        }
     }
 
     /**
@@ -94,22 +88,24 @@ public class Evaluator {
                 simplifiedTokenList = EvaluateSimpleExpression(list);
             } else {
                 for (int index = 1; index < list.size(); index++) {
-                    list = OperatorProcessor.NOT(list, index);
+                    list = new NOT().NOT(list, index);
                 }
                 for (Integer operator: Tokenizer.OPERATOR_PRECEDENCE) {
                     for (int index = 1; index < list.size(); index++) {
+                        ValidateConsecutiveOperators(list, index, operator);
                         if(operator == list.get(index)){
+
                             if (list.get(index) == Tokenizer.AND && list.get(index + 1) == Tokenizer.AND) {
-                                list = OperatorProcessor.LogicalAND(list, index);
+                                list = new LogicalAND().LogicalAND(list, index);
                             } else if (list.get(index) == Tokenizer.OR && list.get(index + 1) == Tokenizer.OR) {
-                                list = OperatorProcessor.LogicalOR(list, index);
+                                list = new LogicalOR().LogicalOR(list, index);
                             } else if ((list.get(index) == Tokenizer.OR && list.get(index + 1) == Tokenizer.AND)
                                     || (list.get(index) == Tokenizer.AND && list.get(index + 1) == Tokenizer.OR)) {
                                 throw new SyntaxException("Invalid Syntax: Consecutive OR and AND");
                             } else if (list.get(index) == Tokenizer.AND) {
-                                list = OperatorProcessor.BitwiseAND(list, index);
+                                list = new BitwiseAND().BitwiseAND(list, index);
                             } else if (list.get(index) == Tokenizer.OR) {
-                                list = OperatorProcessor.BitwiseOR(list, index);
+                                list = new BitwiseOR().BitwiseOR(list, index);
                             }
                         }
                     }
